@@ -17,7 +17,7 @@ class Main{
             master = PAActiveObject.newActive(Master.class, null);
             master.prepareAction();
             master.startAction();
-            master.collectStatistics();
+//            master.collectStatistics();
         } catch (ActiveObjectCreationException e) {
             e.printStackTrace();
         } catch (NodeException e) {
