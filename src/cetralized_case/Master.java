@@ -40,8 +40,8 @@ import java.util.List;
 
 public class Master implements RunActive,Serializable{
 
-    private final int numberOfSlaves = 5;
-    private final int numberOfJobsForEachSlave = 5;
+    private final int numberOfSlaves = 2;
+    private final int numberOfJobsForEachSlave = 100;
     private List<Slave> slaves = new ArrayList<Slave>();
     List<List<BooleanWrapper>> futures;
 

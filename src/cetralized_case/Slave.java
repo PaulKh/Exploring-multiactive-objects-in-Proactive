@@ -17,7 +17,7 @@ import java.util.List;
  * Created by pkhvoros on 3/4/15.
  */
 @DefineGroups({
-     @Group(name = "perform_computation", selfCompatible = false),
+     @Group(name = "perform_computation", selfCompatible = true),
      @Group(name = "assign_work", selfCompatible = false),
      @Group(name = "help_slave", selfCompatible = false),
      @Group(name = "getters", selfCompatible = true)
@@ -36,7 +36,7 @@ import java.util.List;
         @Compatible({"assign_work", "getters"}),
         @Compatible({"help_slave", "getters"})
 })
-@DefineThreadConfig(threadPoolSize = 4, hardLimit = true)
+@DefineThreadConfig(threadPoolSize = 5, hardLimit = true)
 
 //interface CompletionCallback{
 //    public void completionFinished(Slave slave);
@@ -62,7 +62,7 @@ public class Slave implements RunActive,Serializable{
             while(currentWork > 0) {
                 currentWork = currentWork - speed > 0 ? currentWork - speed : 0;
                 job.setAmountOfWork(currentWork);
-                Thread.sleep(100);
+                Thread.sleep(1000);
             }
         }
         catch (InterruptedException e) {
