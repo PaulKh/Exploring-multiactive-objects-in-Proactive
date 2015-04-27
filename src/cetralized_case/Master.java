@@ -10,6 +10,8 @@ import org.objectweb.proactive.api.PAFuture;
 import org.objectweb.proactive.core.node.NodeException;
 import org.objectweb.proactive.core.util.wrapper.BooleanWrapper;
 import org.objectweb.proactive.core.util.wrapper.IntWrapper;
+import org.objectweb.proactive.gcmdeployment.GCMApplication;
+import org.objectweb.proactive.gcmdeployment.GCMVirtualNode;
 import org.objectweb.proactive.multiactivity.MultiActiveService;
 
 import java.io.Serializable;
@@ -46,11 +48,13 @@ public class Master implements RunActive,Serializable{
     List<List<BooleanWrapper>> futures;
 
     @MemberOf("start_action")
-    public void prepareAction() {
+    public void prepareAction(GCMApplication gcmApplication) {
         //for each slave and for each job we have a future variable
         try {
+//            System.out.println("gcm app =" + gcmApplication.getVirtualNode("Slave") + " " + gcmApplication.getVirtualNode("Slave").getANode());
             for (int i = 0; i < numberOfSlaves; i++) {
-                Slave slave = PAActiveObject.newActive(Slave.class, null);
+                GCMVirtualNode vn = gcmApplication.getVirtualNode("Slave");
+                Slave slave = PAActiveObject.newActive(Slave.class, null, vn.getANode());
                 slaves.add(slave);
                 List<Job> jobs = createJobs();
                 slave.addJobs(jobs);

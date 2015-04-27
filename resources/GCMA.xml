@@ -10,16 +10,20 @@
     <!--</environment>-->
     <environment>
         <javaPropertyVariable name="proactive.home" />
+        <javaPropertyVariable name="application.home" />
     </environment>
 
     <application>
         <proactive base="root" relpath="${proactive.home}">
             <configuration>
-                <!--<java base='root' relpath='${java.home}/bin/java' />-->
+                <applicationClasspath>
+                    <pathElement base="root" relpath="${application.home}/out" />
+                </applicationClasspath>
             </configuration>
             <virtualNode id='Master' capacity='1'>
                 <technicalServices>
                     <class name='org.objectweb.proactive.utils.loggingRequests.LoggerTechnicalService'>
+                        <property name='url_to_log_file' value='/user/pkhvoros/home/Documents/Projects/ViewerToolForActiveObject/logs/' />
                         <property name='is_enabled' value='true' />
                     </class>
                 </technicalServices>
@@ -27,6 +31,7 @@
             <virtualNode id='Slave' capacity='2'>
                 <technicalServices>
                     <class name='org.objectweb.proactive.utils.loggingRequests.LoggerTechnicalService'>
+                        <property name='url_to_log_file' value='/user/pkhvoros/home/Documents/Projects/ViewerToolForActiveObject/logs/' />
                         <property name='is_enabled' value='true' />
                     </class>
                 </technicalServices>
