@@ -36,7 +36,7 @@ import java.util.List;
         @Compatible({"assign_work", "getters"}),
         @Compatible({"help_slave", "getters"})
 })
-@DefineThreadConfig(threadPoolSize = 5, hardLimit = true)
+@DefineThreadConfig(threadPoolSize = 6, hardLimit = true)
 
 //interface CompletionCallback{
 //    public void completionFinished(Slave slave);
@@ -62,7 +62,7 @@ public class Slave implements RunActive,Serializable{
             while(currentWork > 0) {
                 currentWork = currentWork - speed > 0 ? currentWork - speed : 0;
                 job.setAmountOfWork(currentWork);
-                Thread.sleep(1000);
+                Thread.sleep(100);
             }
         }
         catch (InterruptedException e) {

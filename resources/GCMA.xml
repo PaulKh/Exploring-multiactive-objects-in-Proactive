@@ -28,7 +28,7 @@
                     </class>
                 </technicalServices>
             </virtualNode>
-            <virtualNode id='Slave' capacity='2'>
+            <virtualNode id='Slave' capacity='10'>
                 <technicalServices>
                     <class name='org.objectweb.proactive.utils.loggingRequests.LoggerTechnicalService'>
                         <property name='url_to_log_file' value='/user/pkhvoros/home/Documents/Projects/ViewerToolForActiveObject/logs/' />

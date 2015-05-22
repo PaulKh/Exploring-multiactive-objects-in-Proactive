@@ -37,13 +37,13 @@ import java.util.List;
 @DefineRules({
         @Compatible({"assign_help", "collect_statistics"})
 })
-@DefineThreadConfig(threadPoolSize = 2, hardLimit = true)
+@DefineThreadConfig(threadPoolSize = 1, hardLimit = true)
 
 
 public class Master implements RunActive,Serializable{
 
-    private final int numberOfSlaves = 2;
-    private final int numberOfJobsForEachSlave = 100;
+    private final int numberOfSlaves = 10;
+    private final int numberOfJobsForEachSlave = 200;
     private List<Slave> slaves = new ArrayList<Slave>();
     List<List<BooleanWrapper>> futures;
 
