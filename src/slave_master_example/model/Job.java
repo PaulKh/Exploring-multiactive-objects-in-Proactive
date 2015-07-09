@@ -1,4 +1,4 @@
-package model;
+package slave_master_example.model;
 
 import java.io.Serializable;
 

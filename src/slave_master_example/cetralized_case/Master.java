@@ -1,12 +1,11 @@
-package cetralized_case;
+package slave_master_example.cetralized_case;
 
-import model.Job;
+import slave_master_example.model.Job;
 import org.objectweb.proactive.ActiveObjectCreationException;
 import org.objectweb.proactive.Body;
 import org.objectweb.proactive.RunActive;
 import org.objectweb.proactive.annotation.multiactivity.*;
 import org.objectweb.proactive.api.PAActiveObject;
-import org.objectweb.proactive.api.PAFuture;
 import org.objectweb.proactive.core.node.NodeException;
 import org.objectweb.proactive.core.util.wrapper.BooleanWrapper;
 import org.objectweb.proactive.core.util.wrapper.IntWrapper;
@@ -43,7 +42,7 @@ import java.util.List;
 public class Master implements RunActive,Serializable{
 
     private final int numberOfSlaves = 10;
-    private final int numberOfJobsForEachSlave = 200;
+    private final int numberOfJobsForEachSlave = 1000;
     private List<Slave> slaves = new ArrayList<Slave>();
     List<List<BooleanWrapper>> futures;
 
@@ -106,7 +105,7 @@ public class Master implements RunActive,Serializable{
                     freeSlave.helpAnotherSlave(slaveWhichNeedsHelp);
                     System.out.print("\nSlave" + slaves.indexOf(freeSlave) + " helps slave" + slaves.indexOf(slaveWhichNeedsHelp));
                 }
-                Thread.sleep(100);
+                Thread.sleep(20);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -115,6 +114,7 @@ public class Master implements RunActive,Serializable{
     }
 
 //    Returns true if there are still some work to do. I.e. if someone still working
+    @MemberOf("collect_statistics")
     private boolean printAmountOfWorkLeft(){
         System.out.println("Amount of work left");
         boolean isStillWorking = false;
@@ -133,14 +133,15 @@ public class Master implements RunActive,Serializable{
         return isStillWorking;
     }
     @MemberOf("collect_statistics")
+    public void doSomething(){
+        System.out.println("SMTH");
+    }
+    @MemberOf("collect_statistics")
     public void collectStatistics(){
-        boolean isStillWorking = true;
-        while(isStillWorking){
-            isStillWorking = false;
+        for(int i = 0; i < 5; i++){
             try {
-                Thread.sleep(100);
-                isStillWorking = printAmountOfWorkLeft();
-
+                Thread.sleep(300);
+                ((Master)PAActiveObject.getStubOnThis()).doSomething();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

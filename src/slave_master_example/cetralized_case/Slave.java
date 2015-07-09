@@ -1,13 +1,13 @@
-package cetralized_case;
+package slave_master_example.cetralized_case;
 
-import model.Job;
+import slave_master_example.model.Job;
 import org.objectweb.proactive.Body;
 import org.objectweb.proactive.RunActive;
 import org.objectweb.proactive.annotation.multiactivity.*;
 import org.objectweb.proactive.core.util.wrapper.BooleanWrapper;
 import org.objectweb.proactive.core.util.wrapper.IntWrapper;
 import org.objectweb.proactive.multiactivity.MultiActiveService;
-import utilities.SpeedGenerator;
+import slave_master_example.utilities.SpeedGenerator;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ import java.util.List;
         @Compatible({"assign_work", "getters"}),
         @Compatible({"help_slave", "getters"})
 })
-@DefineThreadConfig(threadPoolSize = 6, hardLimit = true)
+@DefineThreadConfig(threadPoolSize = 10, hardLimit = true)
 
 //interface CompletionCallback{
 //    public void completionFinished(Slave slave);
@@ -62,7 +62,7 @@ public class Slave implements RunActive,Serializable{
             while(currentWork > 0) {
                 currentWork = currentWork - speed > 0 ? currentWork - speed : 0;
                 job.setAmountOfWork(currentWork);
-                Thread.sleep(100);
+                Thread.sleep(10);
             }
         }
         catch (InterruptedException e) {
