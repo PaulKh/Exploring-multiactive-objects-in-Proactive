@@ -17,7 +17,7 @@ import thread_limit_example.LimitExample;
 class Main{
     private static GCMApplication gcmApplication = null;
     public static void main(String[] args){
-        runConcurrentReadWriteExample();
+        runMasterSlaveExample();
     }
     private static void runLimitExample(){
         initTechnicalService(LimitExample.class, "/GCMALimitExample.xml");
